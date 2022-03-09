@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
-// var sortJsonArray = require('sort-json-array');
+var sortJsonArray = require('sort-json-array');
 var path = require('path');
 //Database configuration file
-//var DBconfig = require('../config.json');
+var DBconfig = require('../config.json');
 
 //MSSQL
-//var sqlclient = require("mssql");
+var sqlclient = require("mssql");
 //var Connection = require('tedious').Connection;
 
-//var connectionString =DBconfig.connectionString;
+var connectionString =DBconfig.connectionString;
 
 //#region get loss data
 

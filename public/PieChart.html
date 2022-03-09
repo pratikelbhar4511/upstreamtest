@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html>
+<script src="plugins/moment.js/moment.js"></script>
+<style type="text/css">
+    html,
+    body {
+        /* width: 100%;
+        height: 100%; */
+        margin: 0;
+        padding: 0;
+    }
+
+    .table td {
+        font-size: 25px;
+    }
+
+    .table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+
+    /* .blink_me {
+  animation: blinker 1s linear infinite;
+} */
+    .blink {
+        animation: blinker 1s linear infinite;
+
+    }
+
+    @keyframes blinker {
+        100% {
+            opacity: 1.0;
+
+        }
+    }
+</style>
+<meta http-equiv="Refresh" content="120">
+
+<body>
+
+    <section class="content-header">
+        <div class="col-md-12">
+
+            <div class="col-md-5">
+                <a href="/Dashboard.html">
+                    <div class="btn btn-primary" style="float:left">
+                        <span class="logo-lg"> <img src="dist/img/MintFDI.png" height="40" width="60"
+                                style="margin-right: 5%;"> </span><br>
+                        <span id="lblBatchAssi" style="color:White;font-family:Verdana;font-size:18px;font:bold;">LOSS
+                            ASSISTANCE</span>
+                        <br /><span style="font-size: large;">Click Here For More Details...</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <!-- <h1>
+                    Dashboard
+                </h1> -->
+            </div>
+        </div>
+
+
+    </section>
+    <br>
+    <br>
+    <br /><br />
+
+
+    <section class="row" class="border border-light">
+        <div class=" col-md-12">
+
+            <div class="col-md-6">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box-title">
+                            <div class="box-header">
+                                <h4 class="box-title"
+                                    style="font-weight:bold;font-size:27px;text-align: center;color:  rgb(17, 100, 253)">
+                                    Basic Condition Monitoring</h4>
+                            </div>
+                            <div class="box-body1" style="height: 600px;width: 100%; overflow: auto;">
+                                <table id="tblBasicCondition" class="table  table-hover" style="font-weight:bold">
+                                    <thead>
+                                        <tr style="text-align: center;font-size:25px;;background-color: cornflowerblue">
+                                            <th>
+                                                Equipment
+                                            </th>
+                                            <th>
+                                                SP
+                                            </th>
+                                            <th>
+                                                PV
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyBasic">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-1"></div>
+
+            <div class=" col-md-5" id="containerLossgraph">
+
+                <div class="box-body border border-dark" style="height:500px;">
+                    <h4 class="box-title"
+                        style="font-weight:bold;font-size:27px;text-align: center;color: rgb(17, 100, 253)">Current
+                        Shift Loss</h4>
+                    <canvas id="pieChartCanvas"></canvas>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </section>
+    <br>
+    <br>
+    <section class="row">
+        <div class=" col-md-12">
+            <div class=" col-md-5" id="containerPreLossgraph">
+
+                <div class="box-body" style="height:500px;margin-top: 5%;">
+                    <h4 class="box-title"
+                        style="font-weight:bold;font-size:27px;text-align: center;color:  rgb(17, 100, 253)">Previous
+                        Shift
+                        Loss</h4>
+                    <canvas id="PreviouspieChartCanvas"></canvas>
+
+                </div>
+            </div>
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-6">
+
+                <div class="row">
+                    <div class="col-md-12" style="margin-top: 5%;">
+                        <div>
+                            <h3 style="font-weight:bold;font-size:30px;text-align: center;">Loss Description:-</h3><br>
+
+                            <div class="row blink">
+                                <h4 class="box-title" id="currdescid"
+                                    style="font-weight:bold;font-size:40px;color: red;text-align: center;">No Loss Found
+                                </h4>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 style="font-weight:bold;font-size:30px;text-align: center;">Action:-</h3><br>
+                            <div class="row blink">
+                                <h4 class="box-title" id="currActionid"
+                                    style="font-weight:bold;font-size:40px;color: red;text-align: center;">Not
+                                    Applicable</h4>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box-title">
+                                    <div class="box-header">
+                                        <h4 class="box-title" style="font-weight:bold;font-size:27px;">Previous Loss
+                                            Details</h4>
+                                    </div>
+                                    <div class="box-body1" style="width: 100%; overflow: auto;">
+                                        <table id="tblLossPre" class="table table-bordered table-hover"
+                                            style="font-weight:bold">
+                                            <thead>
+                                                <tr>
+                                                    <th
+                                                        style="text-align: center;font-size:25px;background-color: cornflowerblue">
+                                                        Loss
+                                                        Description
+                                                    </th>
+                                                    <th
+                                                        style="text-align: center;font-size:25px;background-color: cornflowerblue">
+                                                        Action
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbodyPreLoss">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </section>
+    <br> <br>
+    <br> <br><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <div id="new-footer">
+    </div>
+
+    <script src="plugins/Chart.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="dist/css/blink.css">
+    <script src="javascripts/common.js"></script>
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+    <script src="plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script>
+
+        var Sdate;
+
+
+        $(document).ready(function () {
+
+            generategraph();
+
+        });
+
+        function generategraph() {
+            debugger;
+            //var today = new Date('2019-10-14 11:00:44.907');
+            var today = new Date();
+
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var min = today.getMinutes();
+            var s = today.getSeconds();
+
+            var Edate = yyyy + "-" + mm + "-" + dd + " " + h + ":" + min + ":" + s
+            var date = yyyy + "-" + mm + "-" + dd;
+            //Shift value
+            var shift1 = date + " " + "07:00:00";
+            var shift2 = date + " " + "15:00:00";
+            var shift3 = date + " " + "23:00:00";
+            var midnight = date + " " + "23:59:59";
+            var newday = new Date();
+            newday.setDate(newday.getDate() - 1);
+            var d = newday.getDate();
+            var m = ("00" + (newday.getMonth() + 1)).slice(-2);
+            var y = newday.getFullYear();
+
+            newday = y + "-" + m + "-" + d + " " + "23:00:00";
+            var olddate = y + "-" + m + "-" + d;
+
+            if (new Date(Edate).valueOf() >= new Date(shift1).valueOf() &&
+                new Date(Edate).valueOf() < new Date(shift2).valueOf()) {
+
+                Sdate = shift1;
+
+            }
+            else if (new Date(Edate).valueOf() >= new Date(shift2).valueOf() &&
+                new Date(Edate).valueOf() < new Date(shift3).valueOf()) {
+                Sdate = shift2;
+            }
+            else if (new Date(Edate).valueOf() >= new Date(newday).valueOf() && new Date(Edate).valueOf() < new Date(shift1).valueOf()
+                || new Date(Edate).valueOf() >= new Date(shift3).valueOf()) {
+                if (new Date(Edate).valueOf() >= new Date(shift3).valueOf()
+                    && new Date(Edate).valueOf() < new Date(midnight).valueOf()
+                ) {
+                    Sdate = shift3;
+                }
+                if (new Date(Edate).valueOf() >= new Date(newday).valueOf() && new Date(Edate).valueOf() < new Date(shift1).valueOf()) {
+                    Sdate = shift3;
+                }
+            }
+            // eDate = '2019-06-03 09:54:01';
+            // var today = new Date('2019-06-03 09:54:01');
+
+            var Sdatetm = new Date(Sdate);
+            Sdatetm.setHours(Sdatetm.getHours() + 8);
+            var mm = Sdatetm.getMonth() + 1;
+            Edate = Sdatetm.getFullYear() + "-" + mm + "-" + Sdatetm.getDate() + " " + Sdatetm.getHours() + ':' + Sdatetm.getMinutes() + ':' + Sdatetm.getSeconds();
+
+
+            // Edate = Sdatetm.getFullYear() + "-" +
+            //     ("00" + (Sdatetm.getMonth() + 1)).slice(-2) + "-" +
+            //     ("00" + Sdatetm.getDate()).slice(-2)
+
+
+
+            $.ajax({
+                type: 'GET',
+                url: '/getlossesdata',
+                data: {
+                    sDate: Sdate,
+                    eDate: Edate
+                },
+                async: false,
+                success: function (result) {
+                    if (result != null) {
+                        var data = result.recordset;
+                        if (data.length > 0) {
+                            var FinalTopLossArr = [];
+
+                            var storemax3 = [], topmaxvalues = [], storemaxdescp3 = [], storesecmax3 = [];
+
+                            // var TotalMax = [], TotalLossDescp = [];
+                            var lossdata = [], TotalPer = [];
+                            var lossdataArray = data;
+
+                            var totallossdurationglobal = 0;
+                            var lineArray = [], flags = [];
+                            for (var m = 0; m < lossdataArray.length; m++) {
+                                if (flags[lossdataArray[m].WorkcellDesc]) continue;
+                                flags[lossdataArray[m].WorkcellDesc] = true;
+                                lineArray.push(lossdataArray[m].WorkcellDesc);
+
+                            }
+                            for (var n = 0; n < lineArray.length; n++) {
+                                var line1 = lineArray[n];
+
+                                lossdata = lossdataArray.filter(function (el) {
+                                    return el.WorkcellDesc == line1;
+                                });
+
+                                var currentlosscode = 0, finallosscode = 0, lossdesc;
+                                var lossduration = 0, lossstarttime = 0, lossendtime = 0, WorkcellDesc = 0, lossDesc = 0;
+                                var lossdataarr = [], Action = [];
+
+                                $.each(lossdata, function (i, d) {
+
+                                    currentlosscode = d.Losscode;
+                                    WorkcellDesc = d.WorkcellDesc;
+
+                                    if (currentlosscode != 0) {
+
+                                        if (currentlosscode != finallosscode && finallosscode != 0) {
+
+                                            lossendtime = d.RowInsertTime;
+
+                                            lossduration = moment.utc(moment(lossendtime, "YYYY-MM-DD HH:mm:ss").diff(moment(lossstarttime, "YYYY-MM-DD HH:mm:ss"))).format("HH:mm:ss");
+
+                                            if (lossstarttime != 0 && finallosscode != 0) {
+
+                                                lossdataarr.push({
+                                                    "losscode": finallosscode,
+                                                    "lossstarttime": lossstarttime,
+                                                    "lossendtime": lossendtime,
+                                                    "lossduration": lossduration,
+                                                    "lossdesc": lossdesc,
+                                                    "WorkcellDesc": WorkcellDesc,
+                                                    "Action": Action
+                                                });
+
+                                                finallosscode = 0;
+                                                lossstarttime = 0;
+                                                lossendtime = 0;
+                                                lossduration = 0;
+                                                lossdesc = "";
+
+                                            }
+
+                                            if (lossstarttime == 0) {
+                                                finallosscode = currentlosscode;
+                                                lossstarttime = d.RowInsertTime;
+                                                lossdesc = d.LossDescription;
+                                                Action = d.Action;
+                                            }
+
+                                        }
+
+                                        else {
+
+                                            if (lossstarttime == 0) {
+                                                finallosscode = currentlosscode;
+                                                lossstarttime = d.RowInsertTime;
+                                                lossdesc = d.LossDescription;
+                                                Action = d.Action;
+
+
+                                                if (lossdata.length - 1 == i) {
+                                                    //set current time as end time
+                                                    lossendtime = yyyy + "-" + mm + "-" + dd + " " + h + ":" + min + ":" + s
+
+                                                    lossduration = moment.utc(moment(lossendtime, "YYYY-MM-DD HH:mm:ss").diff(moment(lossstarttime, "YYYY-MM-DD HH:mm:ss"))).format("HH:mm:ss");
+
+                                                    if (lossstarttime != 0 && finallosscode != 0) {
+
+                                                        lossdataarr.push({
+                                                            "losscode": finallosscode,
+                                                            "lossstarttime": lossstarttime,
+                                                            "lossendtime": lossendtime,
+                                                            "lossduration": lossduration,
+                                                            "lossdesc": lossdesc,
+                                                            "WorkcellDesc": WorkcellDesc,
+                                                            "Action": Action
+                                                        });
+                                                    }
+                                                    var lossstarttimearr = lossstarttime.split(".");
+                                                    lossstarttime = lossstarttimearr[0].replace("T", " ");
+
+                                                    var lossendtimearr = lossendtime.split(".");
+                                                    lossendtime = lossendtimearr[0].replace("T", " ");
+
+                                                    finallosscode = 0;
+                                                    lossstarttime = 0;
+                                                    lossendtime = 0;
+                                                    lossduration = 0;
+                                                    lossdesc = "";
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    else if (currentlosscode == 0) {
+                                        if (lossendtime == 0 && lossstarttime != 0) {
+                                            lossendtime = d.RowInsertTime;
+
+
+                                            lossduration = moment.utc(moment(lossendtime, "YYYY-MM-DD HH:mm:ss").diff(moment(lossstarttime, "YYYY-MM-DD HH:mm:ss"))).format("HH:mm:ss");
+
+                                            if (lossstarttime != 0 && finallosscode != 0) {
+
+                                                lossdataarr.push({
+                                                    "losscode": finallosscode,
+                                                    "lossstarttime": lossstarttime,
+                                                    "lossendtime": lossendtime,
+                                                    "lossduration": lossduration,
+                                                    "lossdesc": lossdesc,
+                                                    "WorkcellDesc": WorkcellDesc,
+                                                    "Action": Action
+                                                });
+                                            }
+                                            var lossstarttimearr = lossstarttime.split(".");
+                                            lossstarttime = lossstarttimearr[0].replace("T", " ");
+
+                                            var lossendtimearr = lossendtime.split(".");
+                                            lossendtime = lossendtimearr[0].replace("T", " ");
+
+                                            finallosscode = 0;
+                                            lossstarttime = 0;
+                                            lossendtime = 0;
+                                            lossduration = 0;
+                                            lossdesc = "";
+
+                                        }
+                                    }
+
+                                });
+
+                                var count = lossdataarr.length;
+
+
+                                var flags = [], code = [], losstime = [], codeloss = [];
+                                // var totallossduration=0;
+
+                                for (var z = 0; z < count; z++) {
+
+                                    //calculate total loss duration between time
+                                    var time1 = lossdataarr[z].lossduration;
+                                    var splitTime1 = time1.split(':');
+
+                                    hour = parseInt(splitTime1[0]);
+                                    minute = parseInt(splitTime1[1]);
+                                    second = parseInt(splitTime1[2]);
+
+                                    // totallossduration += hour * 60 * 60;
+                                    // totallossduration += minute * 60;
+                                    // totallossduration += second;
+
+
+                                    totallossdurationglobal += hour * 60 * 60;
+                                    totallossdurationglobal += minute * 60;
+                                    totallossdurationglobal += second;
+
+                                    if (flags[lossdataarr[z].losscode])
+                                        continue;
+
+                                    flags[lossdataarr[z].losscode] = true;
+                                    code.push(lossdataarr[z].losscode);
+
+                                }
+
+                                var sepratedarr = [], linearr = [];
+                                for (var k = 0; k < code.length; k++) {
+                                    var val = code[k];
+
+                                    sepratedarr = lossdataarr.filter(function (el) {
+                                        return el.losscode == val;
+                                    });
+
+                                    var hour = 0;
+                                    var minute = 0;
+                                    var second = 0;
+                                    var totalsumSecs = 0;
+                                    //var percentage = 0;
+                                    var finalsumsec = 0;
+                                    for (var y = 0; y < sepratedarr.length; y++) {
+
+                                        var time1 = sepratedarr[y].lossduration;
+
+                                        var splitTime1 = time1.split(':');
+
+                                        hour = parseInt(splitTime1[0]);
+                                        minute = parseInt(splitTime1[1]);
+                                        second = parseInt(splitTime1[2]);
+
+                                        totalsumSecs = hour * 60 * 60;
+                                        totalsumSecs += minute * 60;
+                                        totalsumSecs += second;
+
+                                        finalsumsec += totalsumSecs;
+
+                                    }
+
+                                    //percentage = ((finalsumsec * 100) / totallossduration);
+
+                                    // TotalPer.push(percentage);
+
+                                    // TotalMax.push(finalsumsec);
+
+                                    // TotalLossDescp.push(sepratedarr[0].lossdesc);
+
+                                    // FinalTopLossArr.push({"percentage": percentage, 
+                                    // "finalsumsec": finalsumsec, 
+                                    // "lossdesc": sepratedarr[0].lossdesc});
+
+                                    FinalTopLossArr.push({
+                                        "finalsumsec": finalsumsec,
+                                        "lossdesc": sepratedarr[0].lossdesc
+                                    });
+                                }
+
+                            }
+
+
+                            //other than Less Die Temp losses are common to all lines 
+                            //so group those losses which are same across lines
+                            var grouped = [];
+                            FinalTopLossArr.forEach(function (a) {
+                                if (!this[a.lossdesc]) {
+                                    this[a.lossdesc] = { lossdesc: a.lossdesc, percentage: 0, finalsumsec: 0, count: 1 };
+                                    grouped.push(this[a.lossdesc]);
+                                }
+                                else {
+                                    this[a.lossdesc].count++;
+                                }
+
+                                //this[a.lossdesc].percentage = (+this[a.lossdesc].percentage + +a['percentage']);
+                                this[a.lossdesc].percentage = (+this[a.lossdesc].percentage + +((a['finalsumsec'] / totallossdurationglobal) * 100));
+                                this[a.lossdesc].finalsumsec = (+this[a.lossdesc].finalsumsec + +a['finalsumsec']);
+
+                            }, Object.create(null));
+
+
+                            // for (var i = 0; i < grouped.length; i++) {
+                            //     grouped[i].percentage=grouped[i].percentage/grouped[i].count;
+                            // }
+
+                            grouped.sort(function (a, b) {
+                                return b.percentage - a.percentage;
+                            });
+                            console.log(grouped);
+
+                            for (var i = 0; i < grouped.length; i++) {
+
+                                //percentage value
+                                storemax3[i] = grouped[i].percentage.toFixed(1);
+
+                                //loss descreption value
+                                storemaxdescp3[i] = grouped[i].lossdesc;
+
+                                //loss seconds value
+                                storesecmax3[i] = grouped[i].finalsumsec;
+                                storesecmax3[i] = (storesecmax3[i] / 60).toFixed(1);
+
+                                if (i == 2)
+                                    break;
+                            }
+
+                            // for (var i = 0; i < 3; i++) {
+
+                            //     topmaxvalues[i] = Math.max(...TotalPer);
+                            //     const indextop = TotalPer.indexOf(topmaxvalues[i]);
+                            //     //percentage value
+                            //     storemax3[i] = topmaxvalues[i].toFixed(1);
+
+                            //     //loss descreption value
+                            //     storemaxdescp3[i] = TotalLossDescp[indextop];
+
+                            //      //loss seconds value
+                            //     storesecmax3[i] = TotalMax[indextop];
+                            //     storesecmax3[i] = (storesecmax3[i] / 60).toFixed(1);
+
+                            //     remove(TotalPer, topmaxvalues[i]);
+                            //     remove(TotalLossDescp, TotalLossDescp[indextop]);
+                            //     remove(TotalMax, TotalMax[indextop]);
+
+                            // }
+
+                            divsparams(storemax3, storemaxdescp3, storesecmax3, "pieChartCanvas");
+                        }
+                    }
+                    tableTopdata();
+                }
+            });
+        }
+
+        function remove(array, element) {
+            const index = array.indexOf(element);
+
+            if (index !== -1) {
+                array.splice(index, 1);
+            }
+        }
+
+        var chart;
+        function divsparams(TotalMax, LossDescription, storesecmax3, canvasId) {
+
+
+            var theHelp = Chart.helpers;
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(document.getElementById(canvasId), {
+
+                type: 'pie',
+                data: {
+                    labels: LossDescription,
+                    datasets: [{
+                        fill: true,
+                        backgroundColor: [
+                            "#FF0000",
+                            "#008000",
+                            "#2F9AEA"
+                        ],
+                        data: TotalMax,
+
+                    }]
+                },
+
+                options: {
+
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                return data['labels'][tooltipItem['index']] + ': ' + data['datasets'][0]['data'][tooltipItem['index']] + '%';
+                            }
+                        }
+                    },
+                    rotation: -0.7 * Math.PI,
+                    legend: {
+                        display: true,
+                        //position: 'right',
+
+                        labels: {
+                            fontSize: 27,
+                            fontStyle: 'bold',
+                            generateLabels: function (chart) {
+                                var data = chart.data;
+                                if (data.labels.length && data.datasets.length) {
+                                    return data.labels.map(function (label, i) {
+                                        var meta = chart.getDatasetMeta(0);
+                                        var ds = data.datasets[0];
+                                        var arc = meta.data[i];
+                                        var custom = arc && arc.custom || {};
+                                        var getValueAtIndexOrDefault = theHelp.getValueAtIndexOrDefault;
+                                        var arcOpts = chart.options.elements.arc;
+                                        var fill = custom.backgroundColor ? custom.backgroundColor : getValueAtIndexOrDefault(ds.backgroundColor, i, arcOpts.backgroundColor);
+                                        var stroke = custom.borderColor ? custom.borderColor : getValueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
+                                        var bw = custom.borderWidth ? custom.borderWidth : getValueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
+                                        return {
+                                            // And finally : 
+                                            text: label + " " + ds.data[i] + "% ",
+                                            fillStyle: fill,
+                                            strokeStyle: stroke,
+                                            lineWidth: bw,
+                                            hidden: isNaN(ds.data[i]) || meta.data[i].hidden,
+                                            index: i
+                                        };
+                                    });
+                                }
+                                return [];
+                            }
+                        }
+                    }
+                },
+                plugins: [{
+                    afterDatasetsDraw: function (chartInstance, easing) {
+                        // To only draw at the end of animation, check for easing === 1
+                        var ctx = chartInstance.chart.ctx;
+                        var ctx = document.getElementById('pieChartCanvas').getContext('2d');
+                        chartInstance.data.datasets.forEach(function (dataset, i) {
+                            var meta = chartInstance.getDatasetMeta(i);
+                            if (!meta.hidden) {
+                                meta.data.forEach(function (element, index) {
+                                    // Draw the text in black, with the specified font
+                                    ctx.fillStyle = 'white';
+                                    var fontSize = 25;
+                                    var fontStyle = 'normal';
+                                    var fontFamily = 'Helvetica Neue';
+                                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+                                    // Just naively convert to string for now
+                                    var dataString = dataset.data[index].toString();
+                                    // var lablestring=data.labels[index].toString();
+                                    // Make sure alignment settings are correct
+                                    ctx.textAlign = 'center';
+                                    ctx.textBaseline = 'middle';
+                                    var padding1 = 40;
+                                    var padding2 = 5;
+                                    var position = element.tooltipPosition();
+
+                                    ctx.fillText(dataString + '%', position.x, position.y - (fontSize) - padding1);
+                                    ctx.fillText('(' + storesecmax3[index] + 'Mins)', position.x, position.y - (fontSize) - (padding2));
+                                });
+                            }
+                        });
+                    }
+                }]
+            });
+            chart.render();
+        }
+
+        function PreviousGenerateGraph() {
+
+
+            var eDate1 = Sdate;
+            var today1 = new Date(eDate1);
+
+            today1.setHours(today1.getHours() - 8);
+            var mm1 = today1.getMonth() + 1;
+            var sDate1 = today1.getFullYear() + "-" + mm1 + "-" + today1.getDate() + " " + today1.getHours() + ':' + today1.getMinutes() + ':' + today1.getSeconds();
+
+
+
+            $.ajax({
+                type: 'GET',
+                url: '/getPreviousLossdata',
+                data: {
+                    sDate1: sDate1,
+                    eDate1: eDate1
+                },
+                success: function (result) {
+                    if (result != null) {
+                        var datapre = result.recordset;
+                        if (datapre.length > 0) {
+
+                            var FinalTopLossArr = [];
+
+                            var storemax3pre = [], topmaxvaluespre = [], storemaxdescp3pre = [], storepresecmax3 = [];
+
+                            // var TotalMaxpre = [],  TotalLossDescpre = [],TotalPerPrevious = [];
+                            var lossdatapre = [];
+                            var lossdataArraypre = datapre;
+
+                            var totallossdurationglobal = 0;
+                            var lineArraypre = [], flagspre = [];
+                            for (var mpre = 0; mpre < lossdataArraypre.length; mpre++) {
+                                if (flagspre[lossdataArraypre[mpre].WorkcellDesc]) continue;
+                                flagspre[lossdataArraypre[mpre].WorkcellDesc] = true;
+                                lineArraypre.push(lossdataArraypre[mpre].WorkcellDesc);
+
+                            }
+                            for (var npre = 0; npre < lineArraypre.length; npre++) {
+                                var linepre = lineArraypre[npre];
+
+                                lossdatapre = lossdataArraypre.filter(function (el) {
+                                    return el.WorkcellDesc == linepre;
+                                });
+
+                                var currentlosscodepre = 0, finallosscodepre = 0, lossdescpre;
+                                var lossdurationpre = 0, lossstarttimepre = 0, lossendtimepre = 0, WorkcellDescpre = 0;
+                                var lossdataarrpre = [], Action = [];// var timesInSecondspre = [];
+
+                                $.each(lossdatapre, function (i, d) {
+
+
+                                    currentlosscodepre = d.Losscode;
+                                    WorkcellDescpre = d.WorkcellDesc;
+
+
+                                    //timesInSecondspre[i] = 0;
+
+                                    if (currentlosscodepre != 0) {
+
+                                        if (currentlosscodepre != finallosscodepre && finallosscodepre != 0) {
+
+                                            lossendtimepre = d.RowInsertTime;
+
+                                            lossdurationpre = moment.utc(moment(lossendtimepre, "YYYY-MM-DD HH:mm:ss").diff(moment(lossstarttimepre, "YYYY-MM-DD HH:mm:ss"))).format("HH:mm:ss");
+
+                                            if (lossstarttimepre != 0 && finallosscodepre != 0) {
+
+                                                lossdataarrpre.push({
+                                                    "losscode": finallosscodepre,
+                                                    "lossstarttime": lossstarttimepre,
+                                                    "lossendtime": lossendtimepre,
+                                                    "lossduration": lossdurationpre,
+                                                    "lossdesc": lossdescpre,
+                                                    "WorkcellDesc": WorkcellDescpre,
+                                                    "Action": Action
+                                                });
+
+                                                finallosscodepre = 0;
+                                                lossstarttimepre = 0;
+                                                lossendtimepre = 0;
+                                                lossdurationpre = 0;
+                                                lossdescpre = "";
+
+                                            }
+
+
+                                            if (lossstarttimepre == 0) {
+                                                finallosscodepre = currentlosscodepre;
+                                                lossstarttimepre = d.RowInsertTime;
+                                                lossdescpre = d.LossDescription;
+                                                Action = d.Action;
+                                            }
+
+                                        }
+
+                                        else {
+
+                                            if (lossstarttimepre == 0) {
+                                                finallosscodepre = currentlosscodepre;
+                                                lossstarttimepre = d.RowInsertTime;
+                                                lossdescpre = d.LossDescription;
+                                                Action = d.Action;
+                                            }
+                                        }
+                                    }
+
+                                    else if (currentlosscodepre == 0) {
+                                        if (lossendtimepre == 0 && lossstarttimepre != 0) {
+                                            lossendtimepre = d.RowInsertTime;
+
+
+                                            lossdurationpre = moment.utc(moment(lossendtimepre, "YYYY-MM-DD HH:mm:ss").diff(moment(lossstarttimepre, "YYYY-MM-DD HH:mm:ss"))).format("HH:mm:ss");
+
+                                            if (lossstarttimepre != 0 && finallosscodepre != 0) {
+
+                                                lossdataarrpre.push({
+                                                    "losscode": finallosscodepre,
+                                                    "lossstarttime": lossstarttimepre,
+                                                    "lossendtime": lossendtimepre,
+                                                    "lossduration": lossdurationpre,
+                                                    "lossdesc": lossdescpre,
+                                                    "WorkcellDesc": WorkcellDescpre,
+                                                    "Action": Action
+                                                });
+                                            }
+                                            var lossstarttimeprearr = lossstarttimepre.split(".");
+                                            lossstarttimepre = lossstarttimeprearr[0].replace("T", " ");
+
+                                            var lossendtimeprearr = lossendtimepre.split(".");
+                                            lossendtimepre = lossendtimeprearr[0].replace("T", " ");
+
+                                            finallosscodepre = 0;
+                                            lossstarttimepre = 0;
+                                            lossendtimepre = 0;
+                                            lossdurationpre = 0;
+                                            lossdescpre = "";
+
+                                        }
+                                    }
+                                });
+
+                                var count = lossdataarrpre.length;
+
+                                var flags = [], code = [], codeloss = [];
+                                //var totallossduration=0;
+
+                                for (var z = 0; z < count; z++) {
+
+                                    //calculate total loss duration between time
+                                    var time1 = lossdataarrpre[z].lossduration;
+                                    var splitTime1 = time1.split(':');
+
+                                    hour = parseInt(splitTime1[0]);
+                                    minute = parseInt(splitTime1[1]);
+                                    second = parseInt(splitTime1[2]);
+
+                                    // totallossduration += hour * 60 * 60;
+                                    // totallossduration += minute * 60;
+                                    // totallossduration += second;
+
+                                    totallossdurationglobal += hour * 60 * 60;
+                                    totallossdurationglobal += minute * 60;
+                                    totallossdurationglobal += second;
+
+                                    if (flags[lossdataarrpre[z].losscode])
+                                        continue;
+
+                                    flags[lossdataarrpre[z].losscode] = true;
+                                    code.push(lossdataarrpre[z].losscode);
+                                }
+
+                                var sepratedarr = [], linearr = [];
+                                for (var k = 0; k < code.length; k++) {
+                                    var val = code[k];
+
+                                    sepratedarr = lossdataarrpre.filter(function (el) {
+                                        return el.losscode == val;
+                                    });
+
+
+                                    var hour = 0;
+                                    var minute = 0;
+                                    var second = 0;
+                                    var totalsumSecs = 0;
+                                    //var percentage = 0;
+                                    var finalsumsecper = 0;
+                                    for (var y = 0; y < sepratedarr.length; y++) {
+
+                                        var time1 = sepratedarr[y].lossduration;
+
+                                        var splitTime1 = time1.split(':');
+
+                                        hour = parseInt(splitTime1[0]);
+                                        minute = parseInt(splitTime1[1]);
+                                        second = parseInt(splitTime1[2]);
+
+                                        totalsumSecs = hour * 60 * 60;
+                                        totalsumSecs += minute * 60;
+                                        totalsumSecs += second;
+
+                                        finalsumsecper += totalsumSecs;
+
+                                    }
+
+
+                                    //percentage = ((finalsumsecper * 100) / totallossduration);
+
+                                    // TotalPerPrevious.push(percentage);
+
+                                    // TotalMaxpre.push(finalsumsecper);
+
+                                    // TotalLossDescpre.push(sepratedarr[0].lossdesc);
+
+
+                                    FinalTopLossArr.push({
+                                        "finalsumsec": finalsumsecper,
+                                        "lossdesc": sepratedarr[0].lossdesc
+                                    });
+
+
+                                }
+
+                            }
+
+                            //other than Less Die Temp losses are common to all lines 
+                            //so group those losses which are same across lines
+                            var grouped = [];
+                            FinalTopLossArr.forEach(function (a) {
+                                if (!this[a.lossdesc]) {
+                                    this[a.lossdesc] = { lossdesc: a.lossdesc, percentage: 0, finalsumsec: 0, count: 1 };
+                                    grouped.push(this[a.lossdesc]);
+                                }
+                                else {
+                                    this[a.lossdesc].count++;
+                                }
+
+                                //this[a.lossdesc].percentage = (+this[a.lossdesc].percentage + +a['percentage']);
+                                this[a.lossdesc].percentage = (+this[a.lossdesc].percentage + +((a['finalsumsec'] / totallossdurationglobal) * 100));
+                                this[a.lossdesc].finalsumsec = (+this[a.lossdesc].finalsumsec + +a['finalsumsec']);
+
+                            }, Object.create(null));
+
+                            //console.log(grouped);
+
+                            // for (var i = 0; i < grouped.length; i++) {
+                            //     grouped[i].percentage=grouped[i].percentage/grouped[i].count;
+                            // }
+                            // console.log(grouped);
+
+
+                            grouped.sort(function (a, b) {
+                                return b.percentage - a.percentage;
+                            });
+                            console.log(grouped);
+
+                            for (var i = 0; i < grouped.length; i++) {
+
+                                //percentage value
+                                storemax3pre[i] = grouped[i].percentage.toFixed(1);
+
+                                //loss descreption value
+                                storemaxdescp3pre[i] = grouped[i].lossdesc;
+
+                                //loss seconds value
+                                storepresecmax3[i] = grouped[i].finalsumsec;
+                                storepresecmax3[i] = (storepresecmax3[i] / 60).toFixed(1);
+
+                                if (i == 2)
+                                    break;
+                            }
+
+                            // for (var i = 0; i < 3; i++) {
+
+                            //     topmaxvaluespre[i] = Math.max(...TotalPerPrevious);
+                            //     const indextop = TotalPerPrevious.indexOf(topmaxvaluespre[i]);
+
+                            //     storemax3pre[i] = topmaxvaluespre[i].toFixed(1);
+
+                            //     storemaxdescp3pre[i] = TotalLossDescpre[indextop];
+
+                            //     storepresecmax3[i] = TotalMaxpre[indextop];
+                            //     storepresecmax3[i] = (storepresecmax3[i] / 60).toFixed(1);
+
+                            //     removePre(TotalPerPrevious, topmaxvaluespre[i]);
+                            //     removePre(TotalLossDescpre, TotalLossDescpre[indextop]);
+                            //     removePre(TotalMaxpre, TotalMaxpre[indextop]);
+                            // }
+
+                            divsparamsPre(storemax3pre, storemaxdescp3pre, storepresecmax3, "PreviouspieChartCanvas");
+
+                        }
+                    }
+                    getSPPVdata();
+                }
+            });
+        }
+
+        function getSPPVdata() {
+            debugger;
+
+            var Sdatetm = new Date(Sdate);
+            Sdatetm.setHours(Sdatetm.getHours() + 8);
+            var mm = Sdatetm.getMonth() + 1;
+            var enddate = Sdatetm.getFullYear() + "-" + mm + "-" + Sdatetm.getDate() + " " + Sdatetm.getHours() + ':' + Sdatetm.getMinutes() + ':' + Sdatetm.getSeconds();
+
+            // enddate = Sdatetm.getFullYear() + "-" +
+            //     ("00" + (Sdatetm.getMonth() + 1)).slice(-2) + "-" +
+            //     ("00" + Sdatetm.getDate()).slice(-2)
+
+            // Sdate = "2020-2-3 15:00:00";
+            // enddate = "2020-02-03 23:0:0";
+
+            $.ajax({
+                type: 'GET',
+                url: '/getDistNames',
+                async: false,
+                success: function (result) {
+                    if (result != null) {
+                        debugger;
+                        var response = result.recordset;
+                        if (response.length > 0) {
+                            for (var k = 0; k < response.length; k++) {
+                                var name = response[k]["Name"];
+
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '/getSPPVdata',
+                                    data: {
+                                        Sdate: Sdate,
+                                        enddate: enddate,
+                                        name: name
+                                    },
+                                    async: false,
+                                    success: function (result) {
+                                        debugger;
+                                        if (result != null) {
+                                            var data = result.recordset;
+                                            if (data.length > 0) {
+                                                for (var a = 0; a < data.length; a++) {
+
+                                                    var Indication = data[a]["Indication_value"];
+
+                                                    if (Indication == 0) {
+                                                        var row = '<tr style="background-color: yellow">';
+                                                        row += '<td>' + name + '</td>';
+                                                        row += '<td>' + data[a]["SP"].toFixed(2) + '</td>';
+                                                        row += '<td>' + data[a]["PV"].toFixed(2) + '</td>';
+                                                        row += '</tr>';
+                                                        $('#tbodyBasic').append(row);
+                                                    }
+                                                    else if (Indication == 1) {
+                                                        var row = '<tr style="background-color: red">';
+                                                        row += '<td>' + name + '</td>';
+                                                        row += '<td>' + data[a]["SP"].toFixed(2) + '</td>';
+                                                        row += '<td>' + data[a]["PV"].toFixed(2) + '</td>';
+                                                        row += '</tr>';
+                                                        $('#tbodyBasic').append(row);
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+
+
+                        }
+                    }
+                }
+            });
+
+
+
+        }
+
+
+        function removePre(array, element) {
+            const index = array.indexOf(element);
+
+            if (index !== -1) {
+                array.splice(index, 1);
+            }
+        }
+
+        var chartpre;
+        function divsparamsPre(TotalMax, LossDescription, storepresecmax3, canvasId) {
+
+            // Chart.defaults.global.defaultFontColor = 'black';
+            // Chart.defaults.global.defaultFontSize = 16;
+            var theHelp = Chart.helpers;
+            if (chartpre) {
+                chartpre.destroy();
+            }
+
+            chartpre = new Chart(document.getElementById(canvasId), {
+
+                type: 'pie',
+                data: {
+                    labels: LossDescription,
+                    datasets: [{
+                        fill: true,
+                        backgroundColor: [
+                            "#FF0000",
+                            "#008000",
+                            "#2F9AEA"
+                        ],
+                        data: TotalMax,
+
+                    }]
+                },
+
+                options: {
+                    title: {
+                        //fontSize: 20,
+                        // fontStyle: 'bold',
+                        //fillStyle: 'blue',
+                        // display: true,
+                        // text: 'Previous Loss',
+                        //position: 'top'
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                return data['labels'][tooltipItem['index']] + ': ' + data['datasets'][0]['data'][tooltipItem['index']] + '%';
+                            }
+                        }
+                    },
+                    rotation: -0.7 * Math.PI,
+                    legend: {
+                        display: true,
+                        //position: 'right',
+
+                        labels: {
+                            fontSize: 27,
+                            fontStyle: 'bold',
+                            generateLabels: function (chart) {
+                                var data = chart.data;
+                                if (data.labels.length && data.datasets.length) {
+                                    return data.labels.map(function (label, i) {
+                                        var meta = chart.getDatasetMeta(0);
+                                        var ds = data.datasets[0];
+                                        var arc = meta.data[i];
+                                        var custom = arc && arc.custom || {};
+                                        var getValueAtIndexOrDefault = theHelp.getValueAtIndexOrDefault;
+                                        var arcOpts = chart.options.elements.arc;
+                                        var fill = custom.backgroundColor ? custom.backgroundColor : getValueAtIndexOrDefault(ds.backgroundColor, i, arcOpts.backgroundColor);
+                                        var stroke = custom.borderColor ? custom.borderColor : getValueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
+                                        var bw = custom.borderWidth ? custom.borderWidth : getValueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
+                                        return {
+                                            // And finally : 
+                                            text: label + " " + ds.data[i] + "%",
+                                            fillStyle: fill,
+                                            strokeStyle: stroke,
+                                            lineWidth: bw,
+                                            hidden: isNaN(ds.data[i]) || meta.data[i].hidden,
+                                            index: i
+                                        };
+                                    });
+                                }
+                                return [];
+                            }
+                        }
+                    }
+                },
+
+                plugins: [{
+                    afterDatasetsDraw: function (chartInstance, easing) {
+                        // To only draw at the end of animation, check for easing === 1
+                        //var ctx = document.getElementById('PreviouspieChartCanvas');
+
+                        var ctx1 = chartInstance.chart.ctx;
+                        chartInstance.data.datasets.forEach(function (dataset, i) {
+                            var meta = chartInstance.getDatasetMeta(i);
+                            if (!meta.hidden) {
+                                meta.data.forEach(function (element, index) {
+                                    // Draw the text in black, with the specified font
+                                    ctx1.fillStyle = 'white';
+                                    var fontSize = 30;
+                                    var fontStyle = 'normal';
+                                    var fontFamily = 'Helvetica Neue';
+                                    ctx1.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+                                    // Just naively convert to string for now
+                                    var dataString = dataset.data[index].toString();
+                                    // Make sure alignment settings are correct
+                                    ctx1.textAlign = 'center';
+                                    ctx1.textBaseline = 'middle';
+                                    var padding1 = 40;
+                                    var padding2 = 5;
+                                    var position = element.tooltipPosition();
+                                    ctx1.fillText(dataString + '%', position.x, position.y - (fontSize) - padding1);
+                                    ctx1.fillText('(' + storepresecmax3[index] + 'Mins)', position.x, position.y - (fontSize) - padding2);
+                                });
+                            }
+                        });
+                    }
+                }]
+
+            });
+            chartpre.render();
+        }
+
+        //show losses occured in last 5 minutes previously if not found show No loss data
+        function tableTopdata() {
+
+            //var today = new Date('2019-06-03 09:54:01');
+            //var today = new Date('2019-10-14 11:00:44.907');
+
+            var today = new Date();
+
+            var d = today.getDate();
+            var m = today.getMonth() + 1;
+            var y = today.getFullYear();
+            var h = today.getHours();
+            var min = today.getMinutes();
+            var s = today.getSeconds();
+
+            eDate = y + "-" + m + "-" + d + " " + h + ":" + min + ":" + s
+            // var eDate = '2019-06-03 01:54:01';
+            var today1 = new Date(eDate);
+            var milliseconds = Date.parse(today1)
+
+            milliseconds = milliseconds - (5 * 60 * 1000)
+            // - 5 minutes
+            var today = new Date(milliseconds)
+            var d = today.getDate();
+            var m = today.getMonth() + 1;
+            var y = today.getFullYear();
+            var h = today.getHours();
+            var min = today.getMinutes();
+            var s = today.getSeconds();
+
+            var sDate1 = y + "-" + m + "-" + d + " " + h + ":" + min + ":" + s
+
+
+            $.ajax({
+                type: 'GET',
+                url: '/getCurrentLossdata',
+                data: {
+                    sDate: sDate1,
+                    eDate: eDate
+                },
+                async: false,
+                success: function (result) {
+
+                    if (result != null) {
+                        var data = result.recordset;
+                        var LossDescription = 0, LossAction = 0;
+                        if (data.length > 0) {
+
+                            LossDescription = data[0].LossDescription;
+                            LossAction = data[0].Action;
+
+                            console.log("current Loss: " + LossDescription + " and current Action: " + LossAction)
+
+                            blinklable(LossDescription, LossAction);
+
+                        }
+                    }
+
+                    tableTopdataPre();
+                }
+            });
+        }
+
+        function blinklable(LossDescription, LossAction) {
+            setInterval(function () {
+                document.getElementById("currdescid").style.webkitTransitionDuration = "1.0s";
+                document.getElementById("currdescid").style.opacity = 0;
+                document.getElementById("currActionid").style.webkitTransitionDuration = "1.0s";
+                document.getElementById("currActionid").style.opacity = 0;
+                setTimeout(function () {
+                    document.getElementById("currdescid").style.webkitTransitionDuration = "1.0s";
+                    document.getElementById("currdescid").style.opacity = 1;
+                    document.getElementById("currActionid").style.webkitTransitionDuration = "1.0s";
+                    document.getElementById("currActionid").style.opacity = 1;
+                }, 500);
+            }, 1500);
+
+            if (LossDescription != null) {
+                // document.getElementById("currdescid").innerHTML = LossDescription[0];
+                // document.getElementById("currActionid").innerHTML = LossAction[0];
+
+                document.getElementById("currdescid").innerHTML = LossDescription;
+                document.getElementById("currActionid").innerHTML = LossAction;
+            }
+            else {
+                document.getElementById("currdescid").innerHTML = "No Loss Found";
+                document.getElementById("currActionid").innerHTML = "Not Applicable";
+            }
+        }
+
+        //show losses occured in before last 5 minutes previously in same shift
+        function tableTopdataPre() {
+
+            //var today = new Date('2019-10-14 11:00:44.907');
+            //var today = new Date('2019-05-04 16:38:03');
+
+            var today = new Date();
+
+            var milliseconds = Date.parse(today)
+
+            milliseconds = milliseconds - (5 * 60 * 1000)
+            // - 5 minutes
+            var today1 = new Date(milliseconds)
+            var dd = today1.getDate();
+            var mm = today1.getMonth() + 1;
+            var yyyy = today1.getFullYear();
+            var h = today1.getHours();
+            var min = today1.getMinutes();
+            var s = today1.getSeconds();
+
+            var Edate = yyyy + "-" + mm + "-" + dd + " " + h + ":" + min + ":" + s
+            var date = yyyy + "-" + mm + "-" + dd;
+            //Shift value
+            var shift1 = date + " " + "07:00:00";
+            var shift2 = date + " " + "15:00:00";
+            var shift3 = date + " " + "23:00:00";
+            var midnight = date + " " + "23:59:59";
+
+            var newday = new Date();
+            newday.setDate(newday.getDate() - 1);
+            var d = newday.getDate();
+            var m = ("00" + (newday.getMonth() + 1)).slice(-2);
+            var y = newday.getFullYear();
+
+            newday = y + "-" + m + "-" + d + " " + "23:00:00";
+            var olddate = y + "-" + m + "-" + d;
+
+            if (new Date(Edate).valueOf() >= new Date(shift1).valueOf() &&
+                new Date(Edate).valueOf() < new Date(shift2).valueOf()) {
+
+                Sdate = shift1;
+
+            }
+            else if (new Date(Edate).valueOf() >= new Date(shift2).valueOf() &&
+                new Date(Edate).valueOf() < new Date(shift3).valueOf()) {
+                Sdate = shift2;
+            }
+            else if (new Date(Edate).valueOf() >= new Date(newday).valueOf() && new Date(Edate).valueOf() < new Date(shift1).valueOf()
+                || new Date(Edate).valueOf() >= new Date(shift3).valueOf()) {
+                if (new Date(Edate).valueOf() >= new Date(shift3).valueOf()
+                    && new Date(Edate).valueOf() < new Date(midnight).valueOf()
+                ) {
+                    Sdate = shift3;
+                }
+                if (new Date(Edate).valueOf() >= new Date(newday).valueOf() && new Date(Edate).valueOf() < new Date(shift1).valueOf()) {
+                    Sdate = shift3;
+                }
+            }
+
+            var Sdatetm = new Date(Sdate);
+            Sdatetm.setHours(Sdatetm.getHours() + 8);
+            var mm = Sdatetm.getMonth() + 1;
+            Edate = Sdatetm.getFullYear() + "-" + mm + "-" + Sdatetm.getDate() + " " + Sdatetm.getHours() + ':' + Sdatetm.getMinutes() + ':' + Sdatetm.getSeconds();
+
+
+            $.ajax({
+                type: 'GET',
+                url: '/getlossesdata',
+                data: {
+                    sDate: Sdate,
+                    eDate: Edate
+                },
+                async: false,
+                success: function (result) {
+                    if (result != null) {
+                        var data = result.recordset;
+                        if (data.length > 0) {
+
+                            var storemax3 = [], topmaxvalues = [], storemaxdescp3 = [];
+
+                            //var TotalMax = [], TotalLossDescp = [];
+                            var lossdata = [], TotalPer = [];
+                            var lossdataArray = data;
+
+
+                            var lineArray = [], flags = [];
+                            for (var m = 0; m < lossdataArray.length; m++) {
+                                if (flags[lossdataArray[m].WorkcellDesc]) continue;
+                                flags[lossdataArray[m].WorkcellDesc] = true;
+                                lineArray.push(lossdataArray[m].WorkcellDesc);
+
+                            }
+
+                            var lossdataarr = [];
+                            for (var n = 0; n < lineArray.length; n++) {
+                                var line1 = lineArray[n];
+
+                                lossdata = lossdataArray.filter(function (el) {
+                                    return el.WorkcellDesc == line1;
+                                });
+
+                                var currentlosscode = 0, finallosscode = 0, lossdesc;
+                                var lossduration = 0, lossstarttime = 0, lossendtime = 0, WorkcellDesc = 0, lossDesc = 0;
+                                var Action = [];
+
+                                $.each(lossdata, function (i, d) {
+
+                                    currentlosscode = d.Losscode;
+                                    WorkcellDesc = d.WorkcellDesc;
+
+                                    if (currentlosscode != 0) {
+
+                                        if (currentlosscode != finallosscode && finallosscode != 0) {
+
+                                            lossendtime = d.RowInsertTime;
+
+                                            lossduration = moment.utc(moment(lossendtime, "YYYY-MM-DD HH:mm:ss").diff(moment(lossstarttime, "YYYY-MM-DD HH:mm:ss"))).format("HH:mm:ss");
+
+                                            if (lossstarttime != 0 && finallosscode != 0) {
+
+                                                lossdataarr.push({
+                                                    "losscode": finallosscode,
+                                                    "lossstarttime": lossstarttime,
+                                                    "lossendtime": lossendtime,
+                                                    "lossduration": lossduration,
+                                                    "lossdesc": lossdesc,
+                                                    "WorkcellDesc": WorkcellDesc,
+                                                    "Action": Action
+                                                });
+
+                                                finallosscode = 0;
+                                                lossstarttime = 0;
+                                                lossendtime = 0;
+                                                lossduration = 0;
+                                                lossdesc = "";
+
+                                            }
+
+                                            if (lossstarttime == 0) {
+                                                finallosscode = currentlosscode;
+                                                lossstarttime = d.RowInsertTime;
+                                                lossdesc = d.LossDescription;
+                                                Action = d.Action;
+
+                                            }
+
+                                        }
+
+                                        else {
+
+                                            if (lossstarttime == 0) {
+                                                finallosscode = currentlosscode;
+                                                lossstarttime = d.RowInsertTime;
+                                                lossdesc = d.LossDescription;
+                                                Action = d.Action;
+
+
+                                                if (lossdata.length - 1 == i) {
+                                                    //set current time as end time
+                                                    lossendtime = yyyy + "-" + mm + "-" + dd + " " + h + ":" + min + ":" + s
+
+                                                    lossduration = moment.utc(moment(lossendtime, "YYYY-MM-DD HH:mm:ss").diff(moment(lossstarttime, "YYYY-MM-DD HH:mm:ss"))).format("HH:mm:ss");
+
+                                                    if (lossstarttime != 0 && finallosscode != 0) {
+
+                                                        lossdataarr.push({
+                                                            "losscode": finallosscode,
+                                                            "lossstarttime": lossstarttime,
+                                                            "lossendtime": lossendtime,
+                                                            "lossduration": lossduration,
+                                                            "lossdesc": lossdesc,
+                                                            "WorkcellDesc": WorkcellDesc,
+                                                            "Action": Action
+                                                        });
+                                                    }
+                                                    var lossstarttimearr = lossstarttime.split(".");
+                                                    lossstarttime = lossstarttimearr[0].replace("T", " ");
+
+                                                    var lossendtimearr = lossendtime.split(".");
+                                                    lossendtime = lossendtimearr[0].replace("T", " ");
+
+                                                    finallosscode = 0;
+                                                    lossstarttime = 0;
+                                                    lossendtime = 0;
+                                                    lossduration = 0;
+                                                    lossdesc = "";
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    else if (currentlosscode == 0) {
+                                        if (lossendtime == 0 && lossstarttime != 0) {
+                                            lossendtime = d.RowInsertTime;
+
+
+                                            lossduration = moment.utc(moment(lossendtime, "YYYY-MM-DD HH:mm:ss").diff(moment(lossstarttime, "YYYY-MM-DD HH:mm:ss"))).format("HH:mm:ss");
+
+                                            if (lossstarttime != 0 && finallosscode != 0) {
+
+                                                lossdataarr.push({
+                                                    "losscode": finallosscode,
+                                                    "lossstarttime": lossstarttime,
+                                                    "lossendtime": lossendtime,
+                                                    "lossduration": lossduration,
+                                                    "lossdesc": lossdesc,
+                                                    "WorkcellDesc": WorkcellDesc,
+                                                    "Action": Action
+                                                });
+                                            }
+                                            var lossstarttimearr = lossstarttime.split(".");
+                                            lossstarttime = lossstarttimearr[0].replace("T", " ");
+
+                                            var lossendtimearr = lossendtime.split(".");
+                                            lossendtime = lossendtimearr[0].replace("T", " ");
+
+                                            finallosscode = 0;
+                                            lossstarttime = 0;
+                                            lossendtime = 0;
+                                            lossduration = 0;
+                                            lossdesc = "";
+
+                                        }
+                                    }
+
+
+                                });
+
+                            }
+
+
+                            if (lossdataarr.length > 0) {
+                                var TopLosses = []
+                                var maxendtime = [];
+                                for (var i = 0; i < lossdataarr.length; i++) {
+                                    maxendtime.push(lossdataarr[i].lossendtime);
+
+                                }
+
+                                maxendtime.sort(function (a, b) {
+                                    var dt = a;
+                                    var date11 = a.split('T');
+                                    if (date11.length > 1) {
+                                        var date1 = date11[0];
+                                        var time1 = date11[1].split('.');
+                                        var datetime1 = date1 + " " + time1[0];
+
+                                        var dttm = b;
+                                        var dt2 = dttm.split('T');
+                                        if (dt2.length > 1) {
+                                            var date2 = dt2[0];
+                                            var time2 = dt2[1].split('.');
+                                            var datetime2 = date2 + " " + time2[0];
+
+                                            a = new Date(datetime1);
+                                            b = new Date(datetime2);
+                                            return a > b ? -1 : a < b ? 1 : 0;
+                                        }
+                                    }
+                                });
+
+                                var LossDescriptionPRE = [], LossActionPRE = [];
+
+                                for (var y3 = 0, f = 0; y3 < maxendtime.length; y3++) {
+
+                                    if (f == 3) {
+                                        break;
+                                    }
+
+                                    var latestloss = lossdataarr.filter(function (el) {
+                                        return el.lossendtime == maxendtime[y3];
+                                    });
+
+                                    var time1 = latestloss[0].lossduration;
+
+                                    var splitTime1 = time1.split(':');
+
+                                    hour = parseInt(splitTime1[0]);
+                                    minute = parseInt(splitTime1[1]);
+                                    second = parseInt(splitTime1[2]);
+
+                                    var totalsumSecs = hour * 60 * 60;
+                                    totalsumSecs += minute * 60;
+                                    totalsumSecs += second;
+
+                                    //if (totalsumSecs > 15) {
+
+
+                                    if (!LossDescriptionPRE.includes(latestloss[0].lossdesc)) {
+                                        LossDescriptionPRE[f] = latestloss[0].lossdesc;
+                                        LossActionPRE[f] = latestloss[0].Action;
+                                        f++;
+                                    }
+                                    //}
+                                }
+
+                                plotTablePre(LossDescriptionPRE, LossActionPRE, "tblLossPre");
+                            }
+                        }
+                    }
+                    PreviousGenerateGraph();
+                }
+            });
+        }
+
+
+        function plotTablePre(LossDescription, LossAction, TableID) {
+
+            console.log("pre Loss: " + LossDescription + " and pre Action: " + LossAction)
+
+            $("#tbodyPreLoss").empty();
+            var tbl = document.getElementById(TableID).getElementsByTagName("tbody")[0];
+            tbl.innerHTML = "";
+            var total = 0;
+
+            for (var i = 0; i < LossDescription.length; i++) {
+
+                if (total == 2)
+                    break;
+
+                if (i == 0 && document.getElementById("currdescid").innerHTML == "No Loss Found") {
+
+                    if (LossDescription[i] != null) {
+                        document.getElementById("currdescid").innerHTML = LossDescription[i];
+                        document.getElementById("currActionid").innerHTML = LossAction[i];
+                    }
+                }
+                else {
+                    if (document.getElementById("currdescid").innerHTML != LossDescription[i]) {
+                        var row = '<tr>';
+                        row += '<td>' + LossDescription[i] + '</td>';
+                        row += '<td>' + LossAction[i]; + '</td>';
+
+                        row += '</tr>';
+                        $('#tblLossPre tbody').append(row);
+                        total++;
+                    }
+                }
+            }
+
+
+
+
+        }
+
+    </script>
+    <br>
+    <br>
+    <script>
+
+        $("#new-footer").load("footer.html");
+    </script>
+
+</body>
+
+</html>

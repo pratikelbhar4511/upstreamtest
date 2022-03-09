@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+
+<div id="new-header"></div>
+
+
+<body onload="getUSers()" class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    User Management
+
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> Home</a>
+                    </li>
+                    <li class="active">Dashboard</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+
+                            <div class="box-header">
+
+
+                            </div>
+                            <div class="box-tools pull-right">
+                                <img src="dist/img/icons8-plus-40.png" id="openPopup" data-toggle="modal"
+                                    onclick="AddUserModal()">
+
+                            </div>
+                            <div class="box-body">
+
+                                <div class="form-horizontal">
+                                    <div class="box-body">
+
+                                        <div class="box-body table-responsive no-padding"
+                                            style="height: 600px;overflow-y: auto;overflow-x: auto">
+                                            <table id="tblUserData" class="table table-hover">
+                                                <thead>
+
+                                                    <tr>
+                                                        <td id="row-1"></td>
+                                                        <td id="row-2" align="Left"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Sr. No.</th>
+                                                        <th>First Name</th>
+                                                        <th>Last Name</th>
+                                                        <th>Email</th>
+                                                        <th style="display: none;">Password</th>
+                                                        <th>Phone No</th>
+                                                        <th>Role</th>
+                                                        <!-- <th>Status Flag</th>
+                                                        <th>Email Flag</th>
+                                                        <th>SMS Flag</th> -->
+
+
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody id="tbodyUserid">
+                                                    <tr>
+
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <div id="add_project_frm" class="form-horizontal">
+                <div class="box-body">
+                    <div class="modal fade" id="createModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalCreate">User Register</h4>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="box-body">
+                                        <p class="col-md-12" id="project_no_Error" style="color: red;"></p>
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">First Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="txtFname" id="txtFname"
+                                                            placeholder="Enter First Name" class="form-control"
+                                                            style="width: 200px;" pattern="^@[A-Za-z0-9_]{1,2}$"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Last Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="txtLname" id="txtLname"
+                                                            placeholder="Enter Last Name" class="form-control"
+                                                            style="width: 200px;" required />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Email</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="txtEmail" id="txtEmail"
+                                                            placeholder="Enter Email" class="form-control"
+                                                            style="width: 200px;" required />
+
+                                                    </div>
+                                                </div>
+                                                
+
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Password</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="password" name="txtPassword" id="txtPassword"
+                                                            placeholder="Enter Password" class="form-control"
+                                                            style="width: 200px;" required />
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Mobile</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="txtPhone" id="txtPhone"
+                                                            placeholder="Enter Mobile No" class="form-control"
+                                                            style="width: 200px;" required />
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Role</label>
+                                                    <div class="col-sm-9">
+                                                        <select id="ddlRole" style="width: 200px;height: 30px">
+                                                            <option value="1">Super Admin</option>
+                                                            <option value="2">Operator</option>
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Status Flag</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="checkbox" name="txtstatusflag" value="statusflag"
+                                                            required />
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Email Flag</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="checkbox" name="txtemailflag" value="emailflag"
+                                                            required />
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">SmS Flag</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="checkbox" name="txtsmsflag" value="smsflag"
+                                                            required />
+
+                                                    </div>
+                                                </div> -->
+
+
+                                                <label id="lblerr" name="lblcpass" style="color:red"></label>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="modal-footer">
+                                            <button id="btn_add" name="ADD" class="btn btn-primary col-sm-offset-4"
+                                                onclick="sendDataToInsert()">SUBMIT</button>
+
+                                            <button type="button" class="btn btn-primary"
+                                                data-dismiss="modal">Close</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="update" class="form-horizontal">
+            <div class="box-body">
+                <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalCreate">User Register</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div class="box-body">
+                                    <p class="col-md-12" id="project_no_Error" style="color: red;"></p>
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">User Id</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="txtupdateUserId" id="txtupdateUserId"
+                                                        class="form-control" style="width: 200px;" required readonly />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">First Name</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="txtupdateFname" id="txtupdateFname"
+                                                        class="form-control" style="width: 200px;" required />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Last Name</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="txtupdateLname" id="txtupdateLname"
+                                                        class="form-control" style="width: 200px;" required />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Email</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="txtupdateEmail" id="txtupdateEmail"
+                                                        class="form-control" style="width: 200px;" required />
+
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Password</label>
+                                                <div class="col-sm-9">
+                                                    <input type="password" name="txtupdatePassword"
+                                                        id="txtupdatePassword" placeholder="Enter Password"
+                                                        class="form-control" style="width: 200px;" required />
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Mobile</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="txtupdatePhone" id="txtupdatePhone"
+                                                        placeholder="Enter Mobile No" class="form-control"
+                                                        style="width: 200px;" required />
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Role</label>
+                                                <div class="col-sm-9">
+                                                    <select id="ddlupdateRole" style="width: 200px;height: 30px">
+                                                        <option value="1">Super Admin</option>
+                                                        <option value="2">Operator</option>
+                                                        <!-- <option value="3">Factory Admin</option>
+                                                        <option value="4">Factory View</option> -->
+
+                                                    </select>
+                                                    <!-- <input type="text" name="txtCity" id="txtCity" class="form-control" style="width: 250px;" required /> -->
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="form-group">
+                                                <label class="col-sm-3 control-label">Status Flag</label>
+                                                <div class="col-sm-9">
+                                                    <input type="checkbox" name="txtupdatestatusflag"
+                                                        value="txtupdatestatusflag" required />
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Email Flag</label>
+                                                <div class="col-sm-9">
+                                                    <input type="checkbox" name="txtupdatestatusflag"
+                                                        value="txtupdateemailflag" required />
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">SmS Flag</label>
+                                                <div class="col-sm-9">
+                                                    <input type="checkbox" name="txtupdatesmsflag"
+                                                        value="txtupdatesmsflag" required />
+
+                                                </div>
+                                            </div> -->
+
+
+
+                                            <label id="lblerr" name="lblcpass" style="color:red"></label>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="modal-footer">
+                                        <button id="btn_delete" name="DELETE" class="btn btn-primary col-sm-offset-4"
+                                            onclick="sendDataToDelete()">DELETE</button>
+
+                                        <button id="btn_add" name="ADD" class="btn btn-primary col-sm-offset-4"
+                                            onclick="sendDataToUpdate()">SUBMIT</button>
+
+                                        <button type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /.content-wrapper -->
+
+    <div id="new-footer">
+    </div>
+
+    <!-- Control Sidebar -->
+
+    <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+                folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- Common.js -->
+    <script src="javascripts/common.js"></script>
+
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+
+    <!-- Sparkline -->
+    <script src="plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!-- jvectormap -->
+    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- SlimScroll 1.3.0 -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+
+    <script>
+
+        //Global Variables
+        var selectedrow;
+
+        $(document).ready(function () {
+
+        });
+
+
+        function getUSers() {
+            $("#tbodyid").empty();
+            $.get("/getsiteusers", function (data) {
+                if (data != null) {
+                   
+                    var response = data.recordset;
+                    if (response.length > 0) {
+                        $.each(response, function (i, d) {
+
+                            var row = '<tr>';
+                            row += '<td></td>';
+                            row += '<td>' + d["FName"] + '</td>';
+                            row += '<td>' + d["LName"] + '</td>';
+                            row += '<td>' + d["Email"] + '</td>';
+                            row += '<td style = "display:none;">' + d["Password"] + '</td>';
+                            row += '<td>' + d["ContactNo"] + '</td>';
+                            row += '<td>' + d["Role"] + '</td>';
+                            // row += '<td>' + d["StatusFlag"] + '</td>';  
+                            // row += '<td>' + d["EmailFlag"] + '</td>';
+                            // row += '<td>' + d["SMSFlag"] + '</td>';    
+                            row += '<td>' + '<button class="btn btn-primary" onclick="return showpopup(this)">Edit<i class="fas fa-user-edit"></i></button>' + '</td>';
+                            row += '</tr>';
+                            $('#tblUserData tbody').append(row);
+
+                        });
+                        addSerialNumber("tblUserData");
+
+                    }
+                }
+            }
+            )
+        }
+
+        function AddUserModal() {
+            document.getElementById("txtFname").value = '';
+            document.getElementById("txtLname").value = '';
+            document.getElementById("txtEmail").value = '';
+            document.getElementById("txtPassword").value = '';
+            document.getElementById("txtPhone").value = '';
+
+            $('#createModal').modal('show');
+        }
+
+        function sendDataToInsert() {
+            // Required Field validation
+            var fname = document.getElementById("txtFname").value;
+
+            var lName = document.getElementById("txtLname").value;
+            var email = document.getElementById("txtEmail").value;
+            var password = document.getElementById("txtPassword").value;
+            var phone = document.getElementById("txtPhone").value;
+            var r = document.getElementById("ddlRole");
+            var role = r.options[r.selectedIndex].text;
+
+
+            // var statusflag = document.getElementById("txtstatusflag").value;
+            // var emailflag = document.getElementById("txtstatusflag").value;
+            //var smsflag = document.getElementById("txtsmsflag").value;
+
+            if (fname == "" || lName == "" || email == "" || role == "" || phone == "" || password == "" ||
+                fname == null || lName == null || email == null || role == null || phone == null || password == null) {
+                alert("Some Field is missing.. Please Enter Data.");
+            }
+            else {
+
+                $.post("/createuser",
+                    { fname: fname, lName: lName, email: email, password: password, phone: phone, role: role },
+                    function (data) {
+
+                        if (data != null) {
+                            var response = data.rowsAffected;
+                            if (response > 0) {
+
+                                $("#createModal").modal('hide');
+                                alert("Data saved successfully...");
+
+                                var row = '<tr>';
+                                row += '<td></td>';
+                                row += '<td>' + fname + '</td>';
+                                row += '<td>' + lName + '</td>';
+                                row += '<td>' + email + '</td>';
+                                row += '<td style="display:none">' + password + '</td>';
+                                row += '<td>' + phone + '</td>';
+                                row += '<td>' + role + '</td>';
+                                // row += '<td>' +  + '</td>';
+                                // row += '<td>' +  + '</td>';
+                                // row += '<td>' +  + '</td>';
+                                row += '<td>' + '<button class="btn btn-primary" onclick="return showpopup(this)">Edit<i class="fas fa-user-edit"></i></button>' + '</td>';
+                                row += '</tr>';
+                                $('#tblUserData tbody').append(row);
+                                addSerialNumber("tblUserData");
+                            }
+
+                        }
+                    });
+
+            }
+
+        }
+
+        // sending table data to popup window
+
+        function showpopup(rowIndexOfGridview) {
+
+            selectedrow = rowIndexOfGridview.parentNode.parentNode;
+
+            var Id = selectedrow.cells[0].innerHTML;
+            txtupdateUserId.value = Id;
+
+            var Fname = selectedrow.cells[1].innerHTML;
+            txtupdateFname.value = Fname;
+
+            var Lname = selectedrow.cells[2].innerHTML;
+            txtupdateLname.value = Lname;
+
+            var Email = selectedrow.cells[3].innerHTML;
+            txtupdateEmail.value = Email;
+
+            var Password = selectedrow.cells[4].innerHTML;
+            txtupdatePassword.value = Password;
+
+            var Phone = selectedrow.cells[5].innerHTML;
+            txtupdatePhone.value = Phone;
+
+            var Role = selectedrow.cells[6].innerHTML;
+            $('#ddlupdateRole option').map(function () {
+                if ($(this).text() == Role) return this;
+            }).attr('selected', 'selected');
+
+            $("#UpdateModal").modal('show');
+
+        }
+        function sendDataToUpdate() {
+            // Required Field validation
+            var Id = document.getElementById("txtupdateUserId").value;
+            var Fname = document.getElementById("txtupdateFname").value;
+            var Lname = document.getElementById("txtupdateLname").value;
+            var Email = document.getElementById("txtupdateEmail").value;
+            var Password = document.getElementById("txtupdatePassword").value;
+            var Phone = document.getElementById("txtupdatePhone").value;
+
+            var a = document.getElementById("ddlupdateRole");
+            var Role = a.options[a.selectedIndex].text;
+            //  
+            //         var statusflag = document.getElementById("txtupdatestatusflag").value;
+            //         var emailflag = document.getElementById("txtupdatestatusflag").value;
+            //         var smsflag = document.getElementById("txtupdatesmsflag").value; 
+
+
+            if (Id == "" || Fname == "" || Lname == "" || Email == "" || Role == "" || Phone == "" || Password == "" ||
+                Id == null || Fname == null || Lname == null || Email == null || Role == null || Phone == null || Password == null) {
+                alert("Some Field is missing.. Please Enter Data.");
+            }
+            else {
+                //Updation code for user updates
+
+                $.post("/updateUser", { userid: Id, fname: Fname, lname: Lname, email: Email, role: Role, phone: Phone, password: Password }, function (data) {
+
+                    if (data != null) {
+                        var response = data.rowsAffected;
+                        if (response > 0) {
+
+                            $("#UpdateModal").modal('hide');
+                            alert("Data Updated successfully...");
+
+                            selectedrow.cells[1].innerHTML = Fname;
+                            selectedrow.cells[2].innerHTML = Lname;
+                            selectedrow.cells[3].innerHTML = Email;
+                            selectedrow.cells[4].innerHTML = Password;
+                            selectedrow.cells[5].innerHTML = Phone;
+                            selectedrow.cells[6].innerHTML = Role;
+                        }
+                    }
+                });
+
+            }
+
+        }
+
+        function sendDataToDelete() {
+            // Required Field validation
+
+            var choice = confirm("Are you sure to delete this record?");
+            if (choice == true) {
+
+                var Id = document.getElementById("txtupdateUserId").value;
+
+
+                if (Id == "" || Id == null) {
+                    alert("Some Field is missing.. Please Enter Data.");
+                }
+                else {
+                    //Deletion code for records
+
+                    $.post("/deleteUser", { userid: Id }, function (data) {
+
+                        if (data != null) {
+                            var response = data.rowsAffected;
+                            if (response > 0) {
+
+
+                                $("#UpdateModal").modal('hide');
+                                alert("Data Deleted successfully...");
+
+                                var i = selectedrow.rowIndex;
+                                document.getElementById("tblUserData").deleteRow(i);
+                                addSerialNumber("tblUserData");
+
+                            }
+                        }
+                    });
+                }
+            }
+
+        }
+    </script>
+    <script>
+        $("#new-header").load("header.html");
+        $("#new-footer").load("footer.html");
+    </script>
+</body>
+
+</html>
