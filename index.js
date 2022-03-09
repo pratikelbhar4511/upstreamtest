@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
 });
 
 
-router.get('/getCas2OEE', function (req, res, next) {
+router.get('/', function (req, res, next) {
 
 	
 	result= {"recordsets":[[{"Cas2OEE":71.36597321855572}]],"recordset":[{"Cas2OEE":71.36597321855572}],"output":{},"rowsAffected":[1]};
