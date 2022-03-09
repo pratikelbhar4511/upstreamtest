@@ -1,0 +1,275 @@
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	  <!-- jQuery 2.1.4 -->
+	  <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	  <!-- Bootstrap 3.3.5 -->
+	  <script src="bootstrap/js/bootstrap.min.js"></script>
+	  <!-- FastClick -->
+		<script src="plugins/fastclick/fastclick.min.js"></script>
+		
+		<style>
+				.no-js #loader { display: none;  }
+					.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+					.se-pre-con {
+					position: fixed;
+					left: 0px;
+					top: 0px;
+					width: 100%;
+					height: 100%;
+					z-index: 9999;
+					background: url(dist/img/Preloader.gif) center no-repeat #fff;
+					}
+				</style>
+</script>
+	<title>MintFDI</title>
+
+
+	<style>
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+
+		}
+
+		form {
+			border: 3px solid #f1f1f1;
+
+		}
+
+		input[type=text],
+		input[type=password] {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+
+		close:hover,
+		.close:focus {
+			color: red;
+			cursor: pointer;
+		}
+
+		.close {
+			position: absolute;
+			right: 25px;
+			top: 0;
+			color: #000;
+			font-size: 25px;
+			font-weight: bold;
+		}
+
+		button {
+			background-color: deepskyblue;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			cursor: pointer;
+			width: 100%;
+		}
+
+		button:hover {
+			opacity: 0.8;
+		}
+
+		.cancelbtn {
+			width: auto;
+			padding: 10px 18px;
+			background-color: #f44336;
+		}
+
+		img.avatar {
+			width: 20%;
+			border-radius: 30%;
+		}
+
+		.imgcontainer {
+			text-align: center;
+			margin: 0px 0 0px 0;
+			position: relative;
+		}
+
+		.container {
+			padding: 33px;
+		}
+
+		span.psw {
+			float: right;
+			padding-top: 16px;
+		}
+
+		.close {
+			position: absolute;
+			right: 25px;
+			top: 0;
+			color: #000;
+			font-size: 35px;
+			font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+			color: red;
+			cursor: pointer;
+		}
+
+		/* Change styles for span and cancel button on extra small screens */
+
+		@media screen and (max-width: 300px) {
+			span.psw {
+				display: block;
+				float: none;
+			}
+			.cancelbtn {
+				width: 100%;
+			}
+		}
+
+		element {
+			color: red;
+			display: inline;
+		}
+
+
+
+div.well{
+  height: 250px;
+}
+
+.Absolute-Center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.Absolute-Center.is-Responsive {
+  width: 50%;
+  height: 50%;
+  min-width: 200px;
+  max-width: 400px;
+  padding: 40px;
+}
+
+	</style>
+
+	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+<!--BACKSTRETCH-->
+    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+
+	<script src="dist/js/jquery.backstretch.min.js"></script>
+
+</head>
+
+
+
+	<body style="background-image:url('dist/img/back.jpg'); background-size: cover; background-repeat: no-repeat;">
+
+		<div class="se-pre-con" id="loadimg"></div>
+    <div class="container">
+            <div class="row">
+              <div class="Absolute-Center is-Responsive">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">
+
+		<form name="myform" method="POST" onsubmit="return validateform()" 
+		style="background-color: white;box-shadow: #000;width: 380px; height: 430px;">
+			<div class="imgcontainer">
+
+
+				<img src="dist/img/HULLogo.jpg" height="120" width="120">
+			</div>
+			<div class="container">
+				<label for="uname">
+					<b>Email</b>
+				</label>
+				<input placeholder="Enter Email Id" name="uname" id="email" type="text" autofocus=true>
+
+				</br>
+				</br>
+				<label for="psw">
+					<b>Password</b>
+				</label>
+				<input placeholder="Enter Password" name="psw" id="password" required="" type="password">
+				<label id="Label1" style="color: red"></label>
+				<button type="button" onclick="check()">SIGN IN</button>
+				<span class="psw" style="font-size: small">Powered By <b>MintFDI</b>
+				</span>
+
+			</div>
+
+        </form>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+
+			$("#loadimg").hide();
+		});
+
+
+		//Required Field validation
+		function check() {
+
+				var emailId = document.getElementById("email").value;
+				var pass = document.getElementById("password").value;
+
+				if (emailId == "" || emailId == null || pass == "" || pass == null) {
+
+					document.getElementById("Label1").innerHTML = "*Please Enter Email Id & Password";
+					return false;
+				} else {
+
+					//set Logged in time in session to compare
+					var now = new Date().getTime();
+					localStorage.setItem('setupTime', now)
+
+					document.getElementById("Label1").innerHTML = "";
+					//window.location.href = "/Dashboard.html";
+					//login code
+					$.get("/login", { emailId: emailId, pass: pass }, function (data) {
+
+						var response = data.recordset;
+                    if (response.length > 0) {
+							var rolenm = response[0]["Role"];
+
+							if(rolenm=="Super Admin" || rolenm=="Operator")
+							{
+								localStorage.setItem('user_key',emailId);
+								localStorage.setItem('role_key',rolenm);	
+
+								window.location.href = "/SpeedLossDashboard.html";	
+							}
+
+							else if(rolenm=="DB_ERROR")
+							{
+								document.getElementById("Label1").innerHTML = "Unable to connect..";
+							}
+
+						}
+						else {
+							document.getElementById("email").value = "";
+							document.getElementById("password").value = "";
+							document.getElementById("Label1").innerHTML = "Invalid UserId Or Password..";
+						}
+
+					});
+				}
+			}
+		
+
+	</script>
+</body>
+
+
+</html>
