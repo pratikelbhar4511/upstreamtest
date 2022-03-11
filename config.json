@@ -3,11 +3,12 @@
 {
 	"server": "bieno-df-dev-sqlsrv-01.database.windows.net", 
 	"database": "bieno-prjtouch-sqldb",
-	"user": "PRJTouch",
+	"user": "PRJTouch@bieno-df-dev-sqlsrv-01.database.windows.net",
 	"password": "PrJ&T0uch*321",
+	
 	"port": 1433,
 	"options": {
-		"encrypt": false,
+		"encrypt": true,
 		"enableArithAbort": true,
 	"requestTimeout": 130000,
 	"idleTimeoutMillis": 130000
