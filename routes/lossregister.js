@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var sortJsonArray = require('sort-json-array');
+//var sortJsonArray = require('sort-json-array');
 var path = require('path');
 //Database configuration file
 var DBconfig = require('../config.json');

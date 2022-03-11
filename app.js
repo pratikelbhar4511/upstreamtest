@@ -6,7 +6,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+var lossregisterRouter = require('./routes/lossregister');
+var lossRouter = require('./routes/lossdata');
+var userRouter = require('./routes/user');
+var updatelossRouter = require('./routes/updateloss');
+var paratoRouter = require('./routes/parato');
+ var usersRouter = require('./routes/users');
 // var speedlossdashboard = require('./routes/lossdata');
 const { normalize } = require('path');
 
@@ -30,7 +35,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/', lossregisterRouter);
+app.use('/', lossRouter);
+app.use('/', userRouter);
+app.use('/', updatelossRouter);
+app.use('/', paratoRouter);
+ app.use('/', usersRouter);
 // app.use('/lossdata',speedlossdashboard);
 
 // catch 404 and forward to error handler

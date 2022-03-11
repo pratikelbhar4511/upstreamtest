@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var sortJsonArray = require('sort-json-array');
+//var sortJsonArray = require('sort-json-array');
 var path = require('path');
 //Database configuration file
 var DBconfig = require('../config.json');
@@ -524,33 +524,33 @@ router.get('/getCas2OEE', function (req, res, next) {
 	"(LineName='Line 1' OR LineName='Line 2' OR LineName='Line 3' OR LineName='Line 4')"+
 	" AND RowInsertTime between '"+req.query.Sdate+"' and '"+req.query.Edate+"'";
 
-	// connect to your database
-  // connect to your database
-    // sqlclient.connect(connectionString, function (connectionerr) {
+// 	connect to your database
+//   connect to your database
+    sqlclient.connect(connectionString, function (connectionerr) {
 	
-	// 	if (connectionerr) 
-	// 	{
-	// 		console.log('error connecting: ' + connectionerr.stack);
-	// 		res.send("DB_ERROR");
-	// 	}
-    //     // create Request object
-    //     var sqlrequest = new sqlclient.Request();
+		if (connectionerr) 
+		{
+			console.log('error connecting: ' + connectionerr.stack);
+			res.send("DB_ERROR");
+		}
+        // create Request object
+        var sqlrequest = new sqlclient.Request();
            
-    //     // query to the database and get the records
-    //     sqlrequest.query(query, function (err, result) {
-    //         if (err) {
-	// 			console.log(err)
-	// 		}
-	// 		else{
-	// 		// send records as a response
-	// 		sqlclient.close();
-	// 		res.send(result);
-	// 		}
-	// 	});
-	// });
+        // query to the database and get the records
+        sqlrequest.query(query, function (err, result) {
+            if (err) {
+				console.log(err)
+			}
+			else{
+			// send records as a response
+			sqlclient.close();
+			res.send(result);
+			}
+		});
+	});
 	
-	result= {"recordsets":[[{"Cas2OEE":71.36597321855572}]],"recordset":[{"Cas2OEE":71.36597321855572}],"output":{},"rowsAffected":[1]};
-	res.send(result);
+	// result= {"recordsets":[[{"Cas2OEE":71.36597321855572}]],"recordset":[{"Cas2OEE":71.36597321855572}],"output":{},"rowsAffected":[1]};
+	// res.send(result);
 	
 
 });
