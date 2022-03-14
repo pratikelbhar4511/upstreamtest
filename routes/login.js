@@ -11,7 +11,7 @@ var sqlclient = require("mssql");
 var connectionString =DBconfig.connectionString;
 
 router.get('/', function (req, res, next) {
-	res.sendFile(path.join(__dirname, '../', 'public', 'UserRegister.html'));
+	res.sendFile(path.join(__dirname, '../', 'public', 'SpeedLossDashboard.html'));
 });
 
 //#region login
